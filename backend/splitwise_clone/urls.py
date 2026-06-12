@@ -27,9 +27,32 @@ def debug_db_view(request):
             'traceback': traceback.format_exc()
         }, status=500)
 
+def debug_email_view(request):
+    try:
+        from django.core.mail import send_mail
+        from django.conf import settings
+        from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', 'noreply@splitsmart.local')
+        email = request.GET.get('email', 'amitranjan6458@gmail.com')
+        send_mail(
+            'Test Email from SplitSmart Deployed',
+            'If you see this, email sending works!',
+            from_email,
+            [email],
+            fail_silently=False
+        )
+        return JsonResponse({'status': 'ok', 'message': f'Email sent to {email}'})
+    except Exception as e:
+        return JsonResponse({
+            'status': 'error',
+            'error_class': e.__class__.__name__,
+            'message': str(e),
+            'traceback': traceback.format_exc()
+        }, status=500)
+
 urlpatterns = [
     path('', home_view, name='home'),
     path('debug-db/', debug_db_view, name='debug-db'),
+    path('debug-email/', debug_email_view, name='debug-email'),
     path('admin/', admin.site.urls),
     path('api/', include('core.urls')),
 ]
