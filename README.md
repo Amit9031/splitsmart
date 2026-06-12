@@ -89,7 +89,42 @@ You can run automated tests checking split math, member removal validation, sett
 python backend/manage.py test
 ```
 
+## 🌐 Production Deployment Guide
+
+We have added all necessary configuration files (`Procfile`, `vercel.json`, `django-database-url`, and `whitenoise`) to make deployment straightforward.
+
+### 1. Deploy Backend (Render)
+1. Go to [Render](https://render.com).
+2. Create a **New PostgreSQL** Database. Copy the **External Database URL**.
+3. Create a **New Web Service**:
+   - Connect your GitHub repository.
+   - Set **Root Directory** to `backend`.
+   - Set **Build Command**: `pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate`
+   - Set **Start Command**: `gunicorn splitwise_clone.wsgi`
+   - Add **Environment Variables**:
+     - `DATABASE_URL`: (Your Render PostgreSQL Database URL)
+     - `EMAIL_HOST_USER`: `amitrajr7@gmail.com`
+     - `EMAIL_HOST_PASSWORD`: `vfom maee xnax sjfr`
+     - `SECRET_KEY`: (Any random security key string)
+4. Deploy the service and copy the provided Web Service URL (e.g. `https://splitsmart-backend.onrender.com`).
+
+### 2. Deploy Frontend (Vercel)
+1. Go to [Vercel](https://vercel.com).
+2. Create a **New Project** and import your GitHub repository.
+3. Configure settings:
+   - Set **Root Directory** to `frontend`.
+   - Set **Framework Preset** to `Vite`.
+4. Open the code in your editor, open `frontend/vercel.json`, and replace `https://splitsmart-backend.onrender.com` with your actual Render Web Service URL.
+5. Commit and push this change to GitHub:
+   ```bash
+   git add frontend/vercel.json
+   git commit -m "Update backend API proxy URL"
+   git push
+   ```
+6. Vercel will automatically redeploy the frontend. Your app is now live!
+
 ---
+
 
 ## 🤖 AI Collaboration Process
 
