@@ -41,9 +41,9 @@ export default function Auth({ onSuccess }) {
       } else if (activeTab === 'OTP') {
         if (!otpSent) {
           // Send OTP flow
-          await api.auth.sendOtp(otpEmail);
+          const res = await api.auth.sendOtp(otpEmail);
           setOtpSent(true);
-          setSuccess('A 6-digit verification code has been sent to your email.');
+          setSuccess(res?.warning || 'A 6-digit verification code has been sent to your email.');
         } else {
           // Verify OTP flow
           const data = await api.auth.verifyOtp(otpEmail, otpCode);
