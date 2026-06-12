@@ -1,0 +1,10 @@
+group_name,description,amount,paid_by_email,split_type,split_members_emails,split_values
+Trip,Dinner equally split,120.00,amitranjan6458@gmail.com,EQUALLY,amitranjan6458@gmail.com,
+Trip,Taxi rounding cents,100.00,amitranjan6458@gmail.com,EQUALLY,"amitranjan6458@gmail.com,testuser@example.com,otheruser@example.com",
+Trip,Lunch percentage anomaly,150.00,amitranjan6458@gmail.com,PERCENTAGE,"amitranjan6458@gmail.com,testuser@example.com","50.00,49.00"
+Trip,Movie percentage clean,60.00,amitranjan6458@gmail.com,PERCENTAGE,"amitranjan6458@gmail.com,testuser@example.com","40.00,60.00"
+Trip,Groceries unequal anomaly,200.00,amitranjan6458@gmail.com,UNEQUALLY,"amitranjan6458@gmail.com,testuser@example.com","110.00,80.00"
+Trip,Coffee unequal clean,12.50,amitranjan6458@gmail.com,UNEQUALLY,"amitranjan6458@gmail.com,testuser@example.com","6.00,6.50"
+Trip,Snacks share clean,25.00,amitranjan6458@gmail.com,SHARE,"amitranjan6458@gmail.com,testuser@example.com","2,3"
+Trip,Orphan payer,50.00,nonexistent@example.com,EQUALLY,amitranjan6458@gmail.com,
+SkiTrip,Orphan member auto-add,300.00,amitranjan6458@gmail.com,EQUALLY,"amitranjan6458@gmail.com,newmember@example.com",
