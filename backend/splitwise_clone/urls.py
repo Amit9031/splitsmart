@@ -11,11 +11,14 @@ def debug_db_view(request):
         from django.contrib.auth.models import User
         from django.conf import settings
         count = User.objects.count()
+        email_password = getattr(settings, 'EMAIL_HOST_PASSWORD', '')
         return JsonResponse({
             'status': 'ok',
             'user_count': count,
             'email_host_user': getattr(settings, 'EMAIL_HOST_USER', 'None'),
             'email_backend': getattr(settings, 'EMAIL_BACKEND', 'None'),
+            'email_password_len': len(email_password),
+            'email_password_has_spaces': ' ' in email_password,
             'database_engine': getattr(settings, 'DATABASES', {}).get('default', {}).get('ENGINE', 'None'),
             'database_host': getattr(settings, 'DATABASES', {}).get('default', {}).get('HOST', 'None')
         })
